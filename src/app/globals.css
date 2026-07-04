@@ -1,0 +1,314 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * ZaviksTech — "The Practice Ledger" design language
+ *
+ * Warm paper canvas · ink typography · deep pine plates · copper signal.
+ * Display serif (Fraunces) carries hierarchy; a monospaced meta layer
+ * (index numbers, uppercase labels, hairline rules) carries the technical
+ * voice. Corners near-square; elevation via hairlines, not shadows.
+ * Values expressed as HSL channels for Tailwind alpha support.
+ */
+
+@layer base {
+  :root {
+    --background: 40 30% 96%; /* Paper */
+    --foreground: 28 10% 18%; /* Warm ink for body text */
+
+    --card: 42 42% 98.5%; /* Raised paper panels */
+    --card-foreground: 28 10% 18%;
+
+    --popover: 42 42% 98.5%;
+    --popover-foreground: 28 10% 18%;
+
+    --primary: 167 30% 14%; /* Pine — dark plates & primary actions */
+    --primary-foreground: 40 30% 96%;
+
+    --secondary: 26 16% 11%; /* Ink — headlines */
+    --secondary-foreground: 40 30% 96%;
+
+    --accent: 21 74% 44%; /* Copper — the one signal color */
+    --accent-foreground: 42 42% 98.5%;
+
+    --muted: 40 18% 90%;
+    --muted-foreground: 28 8% 36%;
+
+    --destructive: 4 66% 44%;
+    --destructive-foreground: 42 42% 98.5%;
+
+    --success: 152 40% 30%;
+    --success-foreground: 42 42% 98.5%;
+
+    --whatsapp: 142 60% 38%;
+
+    --border: 36 15% 83%; /* Hairlines */
+    --input: 32 12% 66%; /* Field borders sit darker than hairlines */
+    --ring: 21 74% 44%;
+
+    --radius: 0.125rem; /* Near-square corners */
+
+    /* Named brand channels */
+    --paper: 40 30% 96%;
+    --pine: 167 30% 14%;
+    --pine-soft: 167 18% 22%;
+    --copper: 21 74% 44%;
+    --copper-soft: 21 64% 38%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-medium tracking-tight text-secondary;
+  }
+
+  ::selection {
+    background: hsl(var(--copper) / 0.9);
+    color: hsl(var(--paper));
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Respect reduced-motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Section rhythm — generous, editorial */
+  .section {
+    @apply py-20 sm:py-24 lg:py-32;
+  }
+
+  .section-tight {
+    @apply py-14 sm:py-16 lg:py-24;
+  }
+
+  /* Legacy kicker class still used by the admin screens */
+  .eyebrow {
+    @apply font-mono text-[11px] font-medium uppercase tracking-meta text-accent;
+  }
+
+  /* The mono meta voice: kickers, index labels, breadcrumbs */
+  .meta {
+    @apply font-mono text-[11px] font-medium uppercase tracking-meta text-muted-foreground sm:text-xs;
+  }
+
+  .meta-dark {
+    @apply font-mono text-[11px] font-medium uppercase tracking-meta text-primary-foreground/60 sm:text-xs;
+  }
+
+  /* Display headline defaults (Fraunces wants gentle negative tracking) */
+  .display {
+    @apply font-display font-medium tracking-[-0.015em] text-secondary;
+  }
+
+  /* Text-link underline that draws in from the left on hover */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Blueprint hairline grid — architectural depth behind hero/plates */
+  .blueprint {
+    background-image:
+      linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  .blueprint-dark {
+    background-image:
+      linear-gradient(
+        to right,
+        hsl(var(--paper) / 0.07) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        hsl(var(--paper) / 0.07) 1px,
+        transparent 1px
+      );
+    background-size: 72px 72px;
+  }
+
+  /* Editorial prose for legal pages — typographic, no plugin needed */
+  .prose-legal {
+    @apply max-w-2xl text-base leading-relaxed text-muted-foreground;
+  }
+
+  .prose-legal h1 {
+    @apply font-display text-4xl font-medium tracking-[-0.015em] text-secondary sm:text-5xl;
+  }
+
+  .prose-legal h2 {
+    @apply mt-12 border-t border-border pt-6 font-display text-2xl font-medium text-secondary;
+  }
+
+  .prose-legal p {
+    @apply mt-4;
+  }
+
+  .prose-legal a {
+    @apply text-accent underline underline-offset-4 hover:text-accent/80;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/*
+ * Motion system — progressive enhancement.
+ *
+ * The server renders visible markup. An inline script adds `.js` to <html>;
+ * only then is the hidden state armed, so no-JS and crawlers see content, and
+ * reduced-motion shows everything instantly. Transforms + opacity only.
+ */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.js .reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.js .reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+
+.js .reveal-stagger.is-visible > *:nth-child(1) {
+  transition-delay: 0.04s;
+}
+.js .reveal-stagger.is-visible > *:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.js .reveal-stagger.is-visible > *:nth-child(3) {
+  transition-delay: 0.16s;
+}
+.js .reveal-stagger.is-visible > *:nth-child(4) {
+  transition-delay: 0.22s;
+}
+.js .reveal-stagger.is-visible > *:nth-child(5) {
+  transition-delay: 0.28s;
+}
+.js .reveal-stagger.is-visible > *:nth-child(6) {
+  transition-delay: 0.34s;
+}
+.js .reveal-stagger.is-visible > *:nth-child(7) {
+  transition-delay: 0.4s;
+}
+.js .reveal-stagger.is-visible > *:nth-child(n + 8) {
+  transition-delay: 0.46s;
+}
+
+/* Global film grain — a single fixed layer over paper for tactile depth */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+}
+
+/* Hero ambient — a copper rule that draws in, and a slow grid drift */
+@keyframes draw-rule {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.hero-rule {
+  transform-origin: left;
+  animation: draw-rule 0.9s 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes grid-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 72px, 0);
+  }
+}
+
+.grid-drift {
+  animation: grid-drift 32s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal,
+  .js .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .hero-rule,
+  .grid-drift {
+    animation: none !important;
+  }
+}
