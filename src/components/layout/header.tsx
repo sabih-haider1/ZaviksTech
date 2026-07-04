@@ -84,7 +84,7 @@ export function Header() {
             scrolled ? "h-14 lg:h-16" : "h-16 lg:h-[4.5rem]",
           )}
         >
-          <Logo showName={false} />
+          <Logo showName={false} markClassName="h-12 w-12 lg:h-14 lg:w-14" />
 
           <nav aria-label="Primary" className="hidden items-center lg:flex">
             {navLinks.map((link) => (
@@ -141,7 +141,7 @@ export function Header() {
           className="fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
         >
           <div className="container flex h-16 shrink-0 items-center justify-between">
-            <Logo />
+            <Logo markClassName="h-11 w-11" />
             <button
               type="button"
               className="inline-flex h-11 w-11 items-center justify-center text-secondary"
