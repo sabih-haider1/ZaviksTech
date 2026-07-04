@@ -109,6 +109,10 @@ const config: Config = {
           from: { transform: "scaleX(0)" },
           to: { transform: "scaleX(1)" },
         },
+        marquee: {
+          from: { transform: "translateX(0%)" },
+          to: { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -117,6 +121,7 @@ const config: Config = {
         "fade-in-up": "fade-in-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both",
         "scale-in": "scale-in 0.2s ease-out",
         "rule-grow": "rule-grow 0.8s cubic-bezier(0.22, 1, 0.36, 1) both",
+        marquee: "marquee 32s linear infinite",
       },
     },
   },

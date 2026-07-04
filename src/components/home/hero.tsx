@@ -26,18 +26,6 @@ export function Hero() {
       <ArchSchematic className="pointer-events-none absolute right-0 top-16 hidden w-[24rem] text-secondary/55 [mask-image:linear-gradient(to_bottom,black,transparent_92%)] lg:block xl:-right-4 xl:w-[30rem]" />
 
       <div className="container relative">
-        {/* Meta frame with a drawn copper rule */}
-        <div className="relative flex items-center justify-between border-b border-border py-4 animate-fade-in">
-          <p className="meta">IT &amp; digital practice</p>
-          <p className="meta hidden sm:block">
-            Support · Builds · Security · Automation
-          </p>
-          <span
-            aria-hidden="true"
-            className="hero-rule absolute -bottom-px left-0 h-0.5 w-28 bg-accent"
-          />
-        </div>
-
         {/* The statement */}
         <div className="pb-16 pt-14 sm:pb-20 sm:pt-20 lg:pb-28 lg:pt-24">
           <h1 className="max-w-5xl font-display text-[2.75rem] font-medium leading-[1.04] tracking-[-0.02em] text-secondary animate-fade-in-up sm:text-6xl lg:text-7xl xl:text-[5.25rem]">
@@ -83,26 +71,37 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Service ticker — the hero's baseboard */}
-      <div className="relative border-y border-border bg-card">
-        <div className="container">
-          <ul className="flex flex-wrap items-baseline gap-x-8 gap-y-2 py-4">
-            {services.map((service, index) => (
-              <li key={service.slug}>
-                <Link
-                  href={`/services/${service.slug}`}
-                  className="group inline-flex items-baseline gap-2"
-                >
-                  <span className="font-mono text-[10px] text-muted-foreground/70 transition-colors group-hover:text-accent">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="meta normal-case tracking-normal text-foreground/80 transition-colors group-hover:text-accent">
-                    {service.name}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+      {/* Service ticker — the hero's baseboard, an infinite marquee */}
+      <div
+        className="relative overflow-hidden border-y border-border bg-card [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+        role="region"
+        aria-label="Our services"
+      >
+        <div className="flex w-max animate-marquee py-4 hover:[animation-play-state:paused]">
+          {[0, 1].map((setIndex) => (
+            <ul
+              key={setIndex}
+              aria-hidden={setIndex === 1 ? "true" : undefined}
+              className="flex shrink-0 items-baseline divide-x divide-border"
+            >
+              {services.map((service, index) => (
+                <li key={`${setIndex}-${service.slug}`} className="shrink-0">
+                  <Link
+                    href={`/services/${service.slug}`}
+                    tabIndex={setIndex === 1 ? -1 : undefined}
+                    className="group inline-flex items-baseline gap-2 px-6"
+                  >
+                    <span className="font-mono text-[10px] text-muted-foreground/70 transition-colors group-hover:text-accent">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="meta whitespace-nowrap normal-case tracking-normal text-foreground/80 transition-colors group-hover:text-accent">
+                      {service.name}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ))}
         </div>
       </div>
     </section>

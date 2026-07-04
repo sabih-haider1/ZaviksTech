@@ -84,7 +84,7 @@ export function Header() {
             scrolled ? "h-14 lg:h-16" : "h-16 lg:h-[4.5rem]",
           )}
         >
-          <Logo showName={false} markClassName="h-12 w-12 lg:h-14 lg:w-14" />
+          <Logo showName markClassName="h-12 w-12 lg:h-14 lg:w-14" />
 
           <nav aria-label="Primary" className="hidden items-center lg:flex">
             {navLinks.map((link) => (
