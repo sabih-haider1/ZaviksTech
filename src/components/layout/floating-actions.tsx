@@ -43,7 +43,7 @@ export function FloatingActions() {
 
       {/* Mobile fixed bottom CTA bar. */}
       {!onContactPage && (
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 p-3 backdrop-blur lg:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background p-3 lg:hidden">
           <Link
             href="/contact"
             className="flex h-12 items-center justify-center gap-2 bg-accent text-[13px] font-semibold uppercase tracking-button text-accent-foreground"

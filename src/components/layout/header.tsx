@@ -20,14 +20,6 @@ import { Logo } from "@/components/layout/logo";
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = React.useState(false);
-  const [scrolled, setScrolled] = React.useState(false);
-
-  React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // Close mobile menu on route change.
   React.useEffect(() => {
@@ -71,17 +63,11 @@ export function Header() {
       </div>
 
       <header
-        className={cn(
-          "sticky top-0 z-40 w-full border-b transition-[background-color,border-color,box-shadow] duration-300",
-          scrolled
-            ? "border-border bg-background/90 shadow-[0_8px_30px_-24px_rgba(0,0,0,0.35)] backdrop-blur supports-[backdrop-filter]:bg-background/80"
-            : "border-transparent bg-background",
-        )}
+        className="sticky top-0 z-40 w-full border-b border-border bg-background/95 lg:bg-background/90 lg:supports-[backdrop-filter]:backdrop-blur lg:supports-[backdrop-filter]:bg-background/80"
       >
         <div
           className={cn(
-            "container flex items-center justify-between gap-4 transition-[height] duration-300",
-            scrolled ? "h-14 lg:h-16" : "h-16 lg:h-[4.5rem]",
+            "container flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]",
           )}
         >
           <Logo showName markClassName="h-12 w-12 lg:h-14 lg:w-14" />

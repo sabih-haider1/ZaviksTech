@@ -36,6 +36,13 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (
+      window.matchMedia("(max-width: 767px)").matches ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
+      setShown(true);
+      return;
+    }
     if (typeof IntersectionObserver === "undefined") {
       setShown(true);
       return;
